@@ -44,6 +44,9 @@
     <Folder Include="spider\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ConfigEnum.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="spider\EtoroSpider.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
