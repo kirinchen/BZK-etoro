@@ -6,6 +6,8 @@ export declare enum MarketCategory {
 }
 export declare class EtoroSpider {
     spiderKit: SeleniumKit;
+    config: Config;
     init(c: Config): Promise<void>;
     fetchMarket(mc: MarketCategory): Promise<void>;
+    private parseRow;
 }
