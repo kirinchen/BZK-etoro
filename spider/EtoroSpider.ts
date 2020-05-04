@@ -39,15 +39,50 @@ export class EtoroSpider {
         let trs = await this.spiderKit.driver.findElements(By.css('et-instrument-trading-row'));
         console.log("trs size:" + trs.length);
         for (let i = 0; i < trs.length; i++) {
-            await this.parseRow(trs[i]);
+            let v = await this.parseRow(trs[i]);
+            console.log("v:" + JSON.stringify(v));
         }
     }
 
-    private async parseRow(e: WebElement) {
+    private async parseRow(e: WebElement): Promise<MarketRow> {
         let s = await e.getText();
-        console.log("row!!:" + s);
+
+        let sa = s.split('\n');
+        let rpt = sa[2];
+        var NUMERIC_REGEXP = /\d+\.\d{2}/g;
+        let rptv = parseFloat(rpt.match(NUMERIC_REGEXP)[0]);
+        let checkSe = sa[10];
+        let bsv = checkSe == 'BUYING' ? parseFloat(sa[9]) : 1 - parseFloat(sa[9]);
+
+        return {
+            name: sa[0],
+            riseDay: parseFloat(sa[1]),
+            risePtg: rptv,
+            sellQuote: parseFloat(sa[4]),
+            buyQuote: parseFloat(sa[6]),
+            minQuoteYear: parseFloat(sa[7]),
+            maxQuoteYear: parseFloat(sa[8]),
+            sentimentBuyPtg : bsv
+        };
     }
 
+
+   
+
+
+}
+
+
+export class MarketRow {
+
+    name: string;
+    riseDay: number;
+    risePtg: number;
+    buyQuote: number;
+    sellQuote: number;
+    maxQuoteYear: number;
+    minQuoteYear: number;
+    sentimentBuyPtg: number;
 
 
 }

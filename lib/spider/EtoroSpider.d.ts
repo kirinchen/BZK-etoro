@@ -11,3 +11,13 @@ export declare class EtoroSpider {
     fetchMarket(mc: MarketCategory): Promise<void>;
     private parseRow;
 }
+export declare class MarketRow {
+    name: string;
+    riseDay: number;
+    risePtg: number;
+    buyQuote: number;
+    sellQuote: number;
+    maxQuoteYear: number;
+    minQuoteYear: number;
+    sentimentBuyPtg: number;
+}
