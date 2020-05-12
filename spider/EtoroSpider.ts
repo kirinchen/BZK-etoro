@@ -14,11 +14,10 @@ export enum MarketCategory {
 
 export class EtoroSpider {
     spiderKit: SeleniumKit = new SeleniumKit();
-    config: Config;
+    get config(): Config{ return Config.provide(); }
 
-    public async init(c: Config) {
-        this.config = c;
-        let we = c.get(ConfigEnum.seleniumWebdriver);
+    public async init() {
+        let we = this.config.get(ConfigEnum.seleniumWebdriver);
         console.log("we:" + we);
         await this.spiderKit.init(we);
         await this.spiderKit.driver.manage().window().setRect({ width: 1680, height: 1000, x: 0, y: 0 });
@@ -26,7 +25,7 @@ export class EtoroSpider {
         
     }
 
-    public async fetchMarket(mc: MarketCategory) {
+    public async fetchMarket(mc: MarketCategory) : Promise<Array<MarketRow>> {
         let u = mc;
         console.log("u:"+u);
         await this.spiderKit.driver.get(u);
@@ -37,11 +36,14 @@ export class EtoroSpider {
         await firstResult.click();
 
         let trs = await this.spiderKit.driver.findElements(By.css('et-instrument-trading-row'));
+        let ans = new Array<MarketRow>();
         console.log("trs size:" + trs.length);
         for (let i = 0; i < trs.length; i++) {
             let v = await this.parseRow(trs[i]);
+            ans.push(v);
             console.log("v:" + JSON.stringify(v));
         }
+        return ans;
     }
 
     private async parseRow(e: WebElement): Promise<MarketRow> {
@@ -83,6 +85,8 @@ export class MarketRow {
     maxQuoteYear: number;
     minQuoteYear: number;
     sentimentBuyPtg: number;
+
+
 
 
 }
