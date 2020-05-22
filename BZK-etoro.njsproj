@@ -55,6 +55,9 @@
     <TypeScriptCompile Include="record\EtoroDao.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="record\EtoroRecordService.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="spider\EtoroSpider.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

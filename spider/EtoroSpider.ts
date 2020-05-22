@@ -32,8 +32,10 @@ export class EtoroSpider {
         console.log("fetchMarket!!!");
         let to = this.config.get(ConfigEnum.seleniumTimeout);
         let firstResult = await this.spiderKit.driver.wait(until.elementLocated(By.css('div.mode.sprite')), to);
-        //console.log("firstResult:" + firstResult.getText());
         await firstResult.click();
+
+        let sentimentResult = await this.spiderKit.driver.wait(until.elementLocated(By.css("[automation-id='watchlist-item-list-instrument-sentiment-data-title']")), to);
+        console.log("sentimentResult:" + sentimentResult);
 
         let trs = await this.spiderKit.driver.findElements(By.css('et-instrument-trading-row'));
         let ans = new Array<MarketRow>();
@@ -43,6 +45,7 @@ export class EtoroSpider {
             ans.push(v);
             console.log("v:" + JSON.stringify(v));
         }
+        await this.spiderKit.driver.close();
         return ans;
     }
 
@@ -53,6 +56,15 @@ export class EtoroSpider {
         let rpt = sa[2];
         var NUMERIC_REGEXP = /\d+\.\d{2}/g;
         let rptv = parseFloat(rpt.match(NUMERIC_REGEXP)[0]);
+
+
+
+        /*let sentimentDataE = await e.findElement(By.css("[automation-id='watchlist-item-list-instrument-sentiment-data-title']"));
+        let sentimenP = await sentimentDataE.findElement(By.css(".percentage"));
+        let sentimenPText = await sentimenP.getText();
+        console.log("sentimenPText:" + sentimenPText);*/
+
+
         let checkSe = sa[10];
         let bsv = checkSe == 'BUYING' ? parseFloat(sa[9]) : 1 - parseFloat(sa[9]);
 

@@ -1,12 +1,15 @@
 import { CronJob } from "cron";
+import { EtoroRecordService } from "../record/EtoroRecordService";
+import { MarketCategory } from "../spider/EtoroSpider";
 
 export class CronMarketRecorder {
 
     public register() {
 
-        new CronJob('* * * * * *', () => {
+        new CronJob('0 * * * * *', async () => {
             console.log('You will see this message every second');
-        }, null, true, 'America/Los_Angeles');
+            await EtoroRecordService.getInstance().saveByMarketCategory(MarketCategory.indices);
+        }, null, true);
 
     }
 
