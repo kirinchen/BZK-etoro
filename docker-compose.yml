@@ -1,0 +1,9 @@
+version: '2'
+services:
+
+  etoro-record:
+    image: kirin/etoro-record
+    ports: 
+      - "9901:9901"
+
+
