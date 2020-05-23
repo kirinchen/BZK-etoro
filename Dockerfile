@@ -44,4 +44,4 @@ ADD . /usr/src/app
 RUN npm run build
 # Start
 CMD [ "node", "./lib/server.js" ]
-EXPOSE 1337
+EXPOSE 9901

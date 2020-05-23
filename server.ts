@@ -7,7 +7,7 @@ import { BaseDao, Entity, ValueMap } from 'bzk/lib/record/BaseDao';
 import { UntilsUtils } from 'bzk/lib/UntilsUtils';
 import { EtoroDao } from './record/EtoroDao';
 
-const port = process.env.port || 1337
+const port =  9901
 http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Hello World\n');
