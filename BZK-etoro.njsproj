@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="server.ts" />
+    <Content Include="Dockerfile" />
     <Content Include="jestconfig.json">
       <SubType>Code</SubType>
     </Content>

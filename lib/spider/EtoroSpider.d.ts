@@ -1,4 +1,4 @@
-import { SeleniumKit } from 'selenium-kit';
+import { SeleniumKit } from 'selenium-kit/lib/tool/SeleniumKit';
 import { Config } from 'bzk/lib/comm/config/Config';
 export declare enum MarketCategory {
     commodities = "https://www.etoro.com/discover/markets/commodities",
@@ -7,8 +7,10 @@ export declare enum MarketCategory {
 export declare class EtoroSpider {
     spiderKit: SeleniumKit;
     get config(): Config;
+    get timeout(): number;
     init(): Promise<void>;
     fetchMarket(mc: MarketCategory): Promise<Array<MarketRow>>;
+    private fetchCurrentPage;
     private parseRow;
 }
 export declare class MarketRow {
