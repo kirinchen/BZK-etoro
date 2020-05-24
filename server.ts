@@ -18,9 +18,9 @@ http.createServer(function (req, res) {
 let a = async () => {
 
     await PropertiesCofigLoad.load("./myconfig/bzk.properties");
-     let cmr = new CronMarketRecorder();
-     cmr.register();
-    //await EtoroRecordService.getInstance().saveByMarketCategory(MarketCategory.indices);
+    let cmr = new CronMarketRecorder();
+    cmr.register();
+    await EtoroRecordService.getInstance().saveByMarketCategory(MarketCategory.indices);
 
 
     /*let ed = EtoroDao.getInstance();
