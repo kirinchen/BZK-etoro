@@ -43,5 +43,5 @@ ADD . /usr/src/app
 # TypeScript
 RUN npm run build
 # Start
-CMD [ "node", "./lib/server.js" ]
+CMD [ "nohup","node", "./lib/server.js",">","output.log","&" ]
 EXPOSE 9901
